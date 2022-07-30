@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+  </head>
+  <body>
+    <input id="todo-item" type="text"></input>
+    <input id="todo-date" type="date" />
+    <button onclick = "addTodo()">Add todos</button>
+    <div id="todo"></div>
+    <!--script src="main.js"></script>-->
+    <script>
+      
+        let todos = [];
+        render();
+
+        function addTodo(){
+          //Targeting the input box
+          let new_todo = document.getElementById("todo-item");
+          //Fetching the text from the input box
+          let title = new_todo.value;
+          //Pushing the fetched value to the array
+          let tododate = document.getElementById("todo-date");
+          let date = tododate.value;
+          todos.push({title:title, date:date});
+          //Call render to update display
+          render();
+         }
+
+        function render(){
+            //Reset the display
+            document.getElementById("todo").innerHTML = '';
+            //loop over the array
+            todos.forEach(function (todo1) {
+            //Create new nested div for each array item
+            let element = document.createElement("div");
+            //Set the inner text of the div to current array value
+            element.innerText = "Task: " + todo1.title + ' ' + "Date: " + todo1.date;
+            //Target the root div and append this new div as a Child
+            document.getElementById("todo").appendChild(element);
+            const deletebutton = document.createElement("button");
+            deletebutton.innerText = 'Delete';
+            deletebutton.style ="margin-left: 12px";
+            document.getElementById("todo").appendChild(deletebutton);
+        
+        }); //end of loop
+    } //end of render function
+    </script>
+  </body>
+</html>
