@@ -15,3 +15,4 @@ function sum (array){
     return summ;
 }
 console.log(range(10, 1));
+console.log(sum(range(10, 1)));
