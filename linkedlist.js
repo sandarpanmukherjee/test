@@ -10,10 +10,20 @@ class linkedList{
         this.head = null;
     }
 
+    //Append data
     append(data){
         if(this.head == null){
             this.head = new Node(data);
             return;
+        }
+
+        if(data instanceof linkedList){
+            let current = this.head;
+            while(current.next != null){
+            current = current.next;
+        }
+        current.next = data.head;
+        return;
         }
 
         let current = this.head;
@@ -23,7 +33,18 @@ class linkedList{
         current.next = new Node(data);
     }
 
+    //Prepend data
     prepend(data){
+        if(data instanceof linkedList){
+            let current = data.head;
+            while(current.next != null){
+            current = current.next;
+        }
+        current.next = this.head;
+        this.head = data.head;
+        return;
+        }
+        
         if(this.head == null){
             this.head = new Node(data);
             return;
@@ -34,7 +55,7 @@ class linkedList{
     }
 
     
-
+    //Find number of nodes in linked list
     length(){
         if(this.head == null){
             return 0;
@@ -66,7 +87,7 @@ class linkedList{
             //console.log(current.value);
             current = current.next;
             if(current.next == null){
-                return;
+                throw "Number not found";
             }
            
 
@@ -80,12 +101,22 @@ let list1 = new linkedList();
 list1.append(6);
 list1.append(8);
 list1.prepend(100);
+list1.prepend(200);
 list1.append(10);
 list1.append(14);
-list1.delete(14);
+
+let list2 = new linkedList();
+list2.append(100);
+list2.append(50);
+list2.prepend(25);
+
+list1.prepend(list2);
+
+console.log("Length of linked list is: ", list1.length());
 
 let cur = list1.head;
 while(cur != null){
 console.log(cur.value);
 cur = cur.next;
 }
+
