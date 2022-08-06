@@ -1,101 +1,95 @@
-class Node{
-    constructor(data){
-        this.value = data;
-        this.next = null;
-    }
+class Node {
+  constructor(data) {
+    this.value = data;
+    this.next = null;
+  }
 }
 
-class linkedList{
-    constructor(){
-        this.head = null;
+class linkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  //Append data
+  append(data) {
+    if (this.head == null) {
+      this.head = new Node(data);
+      return;
     }
 
-    //Append data
-    append(data){
-        if(this.head == null){
-            this.head = new Node(data);
-            return;
-        }
-
-        if(data instanceof linkedList){
-            let current = this.head;
-            while(current.next != null){
-            current = current.next;
-        }
-        current.next = data.head;
-        return;
-        }
-
-        let current = this.head;
-        while(current.next != null){
-            current = current.next;
-        }
-        current.next = new Node(data);
+    if (data instanceof linkedList) {
+      let current = this.head;
+      while (current.next != null) {
+        current = current.next;
+      }
+      current.next = data.head;
+      return;
     }
 
-    //Prepend data
-    prepend(data){
-        if(data instanceof linkedList){
-            let current = data.head;
-            while(current.next != null){
-            current = current.next;
-        }
-        current.next = this.head;
-        this.head = data.head;
-        return;
-        }
-        
-        if(this.head == null){
-            this.head = new Node(data);
-            return;
-        }
-        let firstNode = new Node(data);
-        firstNode.next = this.head;
-        this.head = firstNode;
+    let current = this.head;
+    while (current.next != null) {
+      current = current.next;
+    }
+    current.next = new Node(data);
+  }
+
+  //Prepend data
+  prepend(data) {
+    if (data instanceof linkedList) {
+      let current = data.head;
+      while (current.next != null) {
+        current = current.next;
+      }
+      current.next = this.head;
+      this.head = data.head;
+      return;
     }
 
-    
-    //Find number of nodes in linked list
-    length(){
-        if(this.head == null){
-            return 0;
-        }
-        let counter = 1;
-        let current = this.head;
-
-        while(current.next != null){
-            counter++;
-            current=current.next;
-        }
-        return counter;
+    if (this.head == null) {
+      this.head = new Node(data);
+      return;
     }
-    
-    delete(data){
-        if(this.head == null){
-            return;
-        }
-        let current = this.head;
+    let firstNode = new Node(data);
+    firstNode.next = this.head;
+    this.head = firstNode;
+  }
 
-        
-        if(current.value == data){
-            this.head = current.next;
-            return;
-        }
+  //Find number of nodes in linked list
+  length() {
+    if (this.head == null) {
+      return 0;
+    }
+    let counter = 1;
+    let current = this.head;
 
-        while(current.next.value != data)
-        {    
-            //console.log(current.value);
-            current = current.next;
-            if(current.next == null){
-                throw "Number not found";
-            }
-           
+    while (current.next != null) {
+      counter++;
+      current = current.next;
+    }
+    return counter;
+  }
 
-        }
-        current.next = current.next.next;
-        }
+  delete(data) {
+    if (this.head == null) {
+      return;
+    }
+    let current = this.head;
+
+    if (current.value == data) {
+      this.head = current.next;
+      return;
     }
 
+    while (current.next.value != data) {
+      //console.log(current.value);
+      current = current.next;
+      if (current.next == null) {
+        throw "Number not found";
+      }
+    }
+    current.next = current.next.next;
+  }
+}
 
 let list1 = new linkedList();
 list1.append(6);
@@ -115,8 +109,7 @@ list1.prepend(list2);
 console.log("Length of linked list is: ", list1.length());
 
 let cur = list1.head;
-while(cur != null){
-console.log(cur.value);
-cur = cur.next;
+while (cur != null) {
+  console.log(cur.value);
+  cur = cur.next;
 }
-
